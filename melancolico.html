@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melancólico</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #555555;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px; /* Bordes redondeados */
+            background: linear-gradient(to right, #0602f3, #00d1ff); /* Degradado atractivo */
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        button:hover {
+            transform: scale(1.05); /* Efecto de hover */
+        }
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px; /* Espacio entre las imágenes */
+            padding: 20px;
+        }
+        .image-container img {
+            width: 100%;
+            height: 200px; /* Ajusta la altura de las imágenes */
+            object-fit: cover; /* Recorta la imagen manteniendo la proporción */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .image-container img:hover {
+            transform: scale(1.05);
+        }
+        .text-preview {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado largo */
+            height: 150px; /* Altura fija para la ventana de texto */
+            color: #e0e0e0; /* Color de texto más claro */
+        }
+        #fullScreenContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+            display: flex;
+            align-items: center; /* Centra verticalmente */
+            justify-content: center; /* Centra horizontalmente */
+            z-index: 9999; /* Asegúrate de que esté por encima de otros elementos */
+            backdrop-filter: blur(10px); /* Desenfoque de fondo */
+        }
+        #fullScreenImg {
+            max-width: 80%; /* Limita el ancho máximo de la imagen */
+            max-height: 80%; /* Limita la altura máxima de la imagen */
+            border-radius: 10px;
+        }
+        #description {
+            margin-left: 20px; /* Espacio entre la imagen y la descripción */
+            color: white; /* Color del texto de la descripción */
+            max-width: 300px; /* Limita el ancho de la descripción */
+            font-size: 18px; /* Tamaño del texto de la descripción */
+            text-align: left; /* Alineación del texto */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="image-container">
+        <img src="images/foto1.jpg" alt="Descripción de la foto 1" onclick="openFullscreen(this)">
+        <img src="images/foto2.jpg" alt="Descripción de la foto 2" onclick="openFullscreen(this)">
+        <img src="images/foto3.jpg" alt="Descripción de la foto 3" onclick="openFullscreen(this)">
+        <img src="images/foto4.jpg" alt="Descripción de la foto 4" onclick="openFullscreen(this)">
+        <img src="images/foto5.jpg" alt="Descripción de la foto 5" onclick="openFullscreen(this)">
+        <img src="images/foto6.jpg" alt="Descripción de la foto 6" onclick="openFullscreen(this)">
+        <img src="images/foto7.jpg" alt="Descripción de la foto 7" onclick="openFullscreen(this)">
+        <img src="images/foto8.PNG" alt="Descripción de la foto 8" onclick="openFullscreen(this)">
+        <img src="images/foto9.jpg" alt="Descripción de la foto 9" onclick="openFullscreen(this)">
+        <img src="images/foto10.jpg" alt="Descripción de la foto 10" onclick="openFullscreen(this)">
+    </div>
+
+    <a href="Mi amor.docx" download>
+        <button>Descargar archivo Word</button>
+    </a>
+    
+    <a href="index.html">
+        <button>Volver</button> <!-- Botón de volver -->
+    </a>
+
+    <script>
+        var audio = new Audio("music/La OrejadeVanGoghJueves.mp3");
+        var musicPlayed = false; // Variable para controlar si la música ya ha sido activada
+
+        function openFullscreen(img) {
+            // Si la música no ha sido activada, la activamos
+            if (!musicPlayed) {
+                audio.play(); // Reproduce la música
+                musicPlayed = true; // Marca que la música ha sido activada
+            }
+
+            // Crea un contenedor para la imagen y la descripción
+            var fullScreenContainer = document.createElement("div");
+            fullScreenContainer.id = "fullScreenContainer";
+
+            // Crea un nuevo elemento de imagen
+            var fullScreenImg = document.createElement("img");
+            fullScreenImg.src = img.src; // Usa la misma fuente que la imagen original
+            fullScreenImg.id = "fullScreenImg";
+
+            // Añadir la descripción
+            var description = document.createElement("div");
+            description.id = "description";
+            description.innerText = img.alt; // Usa el atributo alt para la descripción
+
+            // Añade la imagen y la descripción al contenedor
+            fullScreenContainer.appendChild(fullScreenImg);
+            fullScreenContainer.appendChild(description);
+
+            // Elimina cualquier contenedor anterior
+            var existingContainer = document.getElementById("fullScreenContainer");
+            if (existingContainer) {
+                existingContainer.remove();
+            }
+
+            // Añade el contenedor al body
+            document.body.appendChild(fullScreenContainer);
+
+            // Registra un evento de clic para cerrar
+            fullScreenContainer.addEventListener("click", function() {
+                fullScreenContainer.remove(); // Elimina el contenedor al hacer clic
+            });
+        }
+    </script>
+</body>
+</html>
