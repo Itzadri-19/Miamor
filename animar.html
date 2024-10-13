@@ -19,7 +19,7 @@
             cursor: pointer;
             border: none;
             border-radius: 50px; /* Bordes redondeados */
-            background: linear-gradient(to right, #f30202, #00d1ff); /* Degradado atractivo */
+            background: linear-gradient(to right, #0602f3, #00d1ff); /* Degradado atractivo */
             color: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, background-color 0.3s ease;
@@ -34,11 +34,13 @@
             padding: 20px;
         }
         .image-container img {
-            width: 100%; /* Ajusta el tamaño de las imágenes para llenar el contenedor */
+            width: 100%;
+            height: 200px; /* Ajusta la altura de las imágenes */
+            object-fit: cover; /* Recorta la imagen manteniendo la proporción */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s;
-            cursor: pointer; /* Cambia el cursor para indicar que se puede hacer clic */
+            cursor: pointer;
         }
         .image-container img:hover {
             transform: scale(1.05);
@@ -76,21 +78,24 @@
 <body>
 
     <div class="image-container">
-        <!-- Añade tus imágenes aquí -->
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto1.jpg" alt="Foto 1" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto2.jpg" alt="Foto 2" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto3.jpg" alt="Foto 3" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto4.jpg" alt="Foto 4" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto5.jpg" alt="Foto 5" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto6.jpg" alt="Foto 6" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto7.jpg" alt="Foto 7" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto8.png" alt="Foto 8" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto9.jpg" alt="Foto 9" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto10.jpg" alt="Foto 10" onclick="openFullscreen(this)">
+        <img src="images/foto1.jpg" alt="Descripción de la foto 1" onclick="openFullscreen(this)">
+        <img src="images/foto2.jpg" alt="Descripción de la foto 2" onclick="openFullscreen(this)">
+        <img src="images/foto3.jpg" alt="Descripción de la foto 3" onclick="openFullscreen(this)">
+        <img src="images/foto4.jpg" alt="Descripción de la foto 4" onclick="openFullscreen(this)">
+        <img src="images/foto5.jpg" alt="Descripción de la foto 5" onclick="openFullscreen(this)">
+        <img src="images/foto6.jpg" alt="Descripción de la foto 6" onclick="openFullscreen(this)">
+        <img src="images/foto7.jpg" alt="Descripción de la foto 7" onclick="openFullscreen(this)">
+        <img src="images/foto8.PNG" alt="Descripción de la foto 8" onclick="openFullscreen(this)">
+        <img src="images/foto9.jpg" alt="Descripción de la foto 9" onclick="openFullscreen(this)">
+        <img src="images/foto10.jpg" alt="Descripción de la foto 10" onclick="openFullscreen(this)">
     </div>
 
     <a href="Mi amor.docx" download>
         <button>Descargar archivo Word</button>
+    </a>
+    
+    <a href="index.html">
+        <button>Volver</button> <!-- Botón de volver -->
     </a>
 
     <script>
