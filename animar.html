@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animar</title>
+    <title>Melancólico</title>
     <style>
         body {
             margin: 0;
@@ -19,7 +19,7 @@
             cursor: pointer;
             border: none;
             border-radius: 50px; /* Bordes redondeados */
-            background: linear-gradient(to right, #f30202, #00d1ff); /* Degradado atractivo */
+            background: linear-gradient(to right, #0602f3, #00d1ff); /* Degradado atractivo */
             color: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, background-color 0.3s ease;
@@ -34,51 +34,87 @@
             padding: 20px;
         }
         .image-container img {
-            width: 100%; /* Ajusta el tamaño de las imágenes para llenar el contenedor */
+            width: 100%;
+            height: 200px; /* Ajusta la altura de las imágenes */
+            object-fit: cover; /* Recorta la imagen manteniendo la proporción */
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s;
-            cursor: pointer; /* Cambia el cursor para indicar que se puede hacer clic */
+            cursor: pointer;
         }
         .image-container img:hover {
             transform: scale(1.05);
         }
-        .text-preview {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
+        #fullScreenContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro */
+            display: flex;
+            align-items: center; /* Centra verticalmente */
+            justify-content: center; /* Centra horizontalmente */
+            z-index: 9999; /* Asegúrate de que esté por encima de otros elementos */
+            backdrop-filter: blur(10px); /* Desenfoque de fondo */
+        }
+        #fullScreenImg {
+            max-width: 80%; /* Limita el ancho máximo de la imagen */
+            max-height: 80%; /* Limita la altura máxima de la imagen */
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado largo */
-            height: 150px; /* Altura fija para la ventana de texto */
-            color: #e0e0e0; /* Color de texto más claro */
+        }
+        #userInfo {
+            margin-top: 20px; /* Espacio entre la imagen y el texto de usuario */
+            color: white; /* Color del texto del usuario */
+            font-size: 24px; /* Tamaño del texto del usuario */
+            text-align: center; /* Alineación del texto */
+        }
+        #likes {
+            font-size: 20px; /* Tamaño del texto de likes */
+            color: #ff4757; /* Color del texto de likes */
         }
     </style>
 </head>
 <body>
 
     <div class="image-container">
-        <!-- Añade tus imágenes aquí -->
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto1.jpg" alt="Foto 1" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto2.jpg" alt="Foto 2" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto3.jpg" alt="Foto 3" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto4.jpg" alt="Foto 4" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto5.jpg" alt="Foto 5" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto6.jpg" alt="Foto 6" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto7.jpg" alt="Foto 7" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto8.png" alt="Foto 8" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto9.jpg" alt="Foto 9" onclick="openFullscreen(this)">
-        <img src="https://itzadri-19.github.io/ProyectoMiamor/images/foto10.jpg" alt="Foto 10" onclick="openFullscreen(this)">
+        <img src="images/foto1.jpg" alt="Descripción de la foto 1" onclick="openFullscreen(this)">
+        <img src="images/foto2.jpg" alt="Descripción de la foto 2" onclick="openFullscreen(this)">
+        <img src="images/foto3.jpg" alt="Descripción de la foto 3" onclick="openFullscreen(this)">
+        <img src="images/foto4.jpg" alt="Descripción de la foto 4" onclick="openFullscreen(this)">
+        <img src="images/foto5.jpg" alt="Descripción de la foto 5" onclick="openFullscreen(this)">
+        <img src="images/foto6.jpg" alt="Descripción de la foto 6" onclick="openFullscreen(this)">
+        <img src="images/foto7.jpg" alt="Descripción de la foto 7" onclick="openFullscreen(this)">
+        <img src="images/foto8.PNG" alt="Descripción de la foto 8" onclick="openFullscreen(this)">
+        <img src="images/foto9.jpg" alt="Descripción de la foto 9" onclick="openFullscreen(this)">
+        <img src="images/foto10.jpg" alt="Descripción de la foto 10" onclick="openFullscreen(this)">
     </div>
 
     <a href="Mi amor.docx" download>
         <button>Descargar archivo Word</button>
     </a>
+    
+    <a href="index.html">
+        <button>Volver</button> <!-- Botón de volver -->
+    </a>
 
     <script>
         var audio = new Audio("music/PartemeLaCara.mp3");
         var musicPlayed = false; // Variable para controlar si la música ya ha sido activada
+
+        function getRandomUser() {
+            const users = [
+                { name: "LuzCielo", message: "¡Cada día es un nuevo comienzo!" },
+                { name: "RayoDeSol", message: "La vida es bella, disfrútala." },
+                { name: "EstrellaBrillante", message: "Los momentos felices son los mejores." },
+                { name: "MariposaViva", message: "Crea tu propia magia." },
+                { name: "SonrisaEterna", message: "Sonríe, la vida es hermosa." },
+                { name: "SueñoDorado", message: "Haz de tu vida un sueño." },
+                { name: "CorazónValiente", message: "Sigue tus sueños." },
+                { name: "AmorInfinito", message: "El amor lo conquista todo." }
+            ];
+            return users[Math.floor(Math.random() * users.length)];
+        }
 
         function openFullscreen(img) {
             // Si la música no ha sido activada, la activamos
@@ -87,33 +123,46 @@
                 musicPlayed = true; // Marca que la música ha sido activada
             }
 
+            // Crea un contenedor para la imagen y la información del usuario
+            var fullScreenContainer = document.createElement("div");
+            fullScreenContainer.id = "fullScreenContainer";
+
             // Crea un nuevo elemento de imagen
             var fullScreenImg = document.createElement("img");
             fullScreenImg.src = img.src; // Usa la misma fuente que la imagen original
-            fullScreenImg.style.width = "100%"; // Ajusta el ancho
-            fullScreenImg.style.height = "100%"; // Ajusta la altura
-            fullScreenImg.style.position = "fixed"; // Posicionamiento fijo
-            fullScreenImg.style.top = "0"; // Coloca en la parte superior
-            fullScreenImg.style.left = "0"; // Coloca en la parte izquierda
-            fullScreenImg.style.objectFit = "contain"; // Mantiene la proporción
-            fullScreenImg.style.zIndex = "9999"; // Asegúrate de que esté por encima de otros elementos
-            fullScreenImg.style.cursor = "pointer"; // Cambia el cursor para indicar que se puede cerrar
+            fullScreenImg.id = "fullScreenImg";
 
-            // Elimina cualquier imagen anterior
-            var existingImg = document.getElementById("fullScreenImg");
-            if (existingImg) {
-                existingImg.remove();
+            // Obtener un usuario aleatorio
+            var user = getRandomUser();
+
+            // Añadir el nombre de usuario y el mensaje
+            var userInfo = document.createElement("div");
+            userInfo.id = "userInfo";
+            userInfo.innerHTML = `<strong>${user.name}</strong><br>${user.message}`;
+
+            // Añadir el número de likes
+            var likes = document.createElement("div");
+            likes.id = "likes";
+            likes.innerText = `❤️ ${Math.floor(Math.random() * 1000)} Likes`;
+
+            // Añade la imagen, el usuario y los likes al contenedor
+            fullScreenContainer.appendChild(fullScreenImg);
+            fullScreenContainer.appendChild(userInfo);
+            fullScreenContainer.appendChild(likes);
+
+            // Elimina cualquier contenedor anterior
+            var existingContainer = document.getElementById("fullScreenContainer");
+            if (existingContainer) {
+                existingContainer.remove();
             }
 
-            // Añade la imagen al body
-            document.body.appendChild(fullScreenImg);
+            // Añade el contenedor al body
+            document.body.appendChild(fullScreenContainer);
 
             // Registra un evento de clic para cerrar
-            fullScreenImg.addEventListener("click", function() {
-                fullScreenImg.remove(); // Elimina la imagen
+            fullScreenContainer.addEventListener("click", function() {
+                fullScreenContainer.remove(); // Elimina el contenedor al hacer clic
             });
-
-            fullScreenImg.id = "fullScreenImg"; // Agrega un id para poder eliminarlo luego
         }
     </script>
 </body>
