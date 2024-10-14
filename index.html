@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elige una opción</title>
     <link rel="stylesheet" href="css/styles.css"> <!-- Enlace al CSS -->
+    <style>
+        /* Aquí puedes añadir los estilos internos si lo necesitas */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+        .button-container {
+            margin: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="button-container">
@@ -19,5 +32,16 @@
         <button onclick="window.location.href='opciones/vernos.html'">¿Cuánto queda para vernos?</button>
         <button onclick="window.location.href='opciones/paris.html'">¿Días para París?</button>
     </div>
+
+    <script>
+        // Verificar si el usuario ha iniciado sesión
+        const lastLogin = localStorage.getItem("lastLogin");
+        const users = JSON.parse(localStorage.getItem("users")) || {};
+
+        // Si no hay usuarios registrados o el último inicio de sesión no existe, redirigir a usuario.html
+        if (!lastLogin || Object.keys(users).length === 0) {
+            window.location.href = "usuario.html";
+        }
+    </script>
 </body>
 </html>
