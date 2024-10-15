@@ -88,34 +88,41 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const photos = [];
-            
             let photoCount = 0;
+
+            // Recorremos los inputs de archivo
             for (let i = 1; i <= 5; i++) {
                 const fileInput = document.getElementById('photo' + i);
+                
                 if (fileInput.files.length > 0) {
                     const file = fileInput.files[0];
                     const reader = new FileReader();
+                    
+                    // Leemos la imagen y la añadimos al array de fotos
                     reader.onload = function(e) {
                         photos.push(e.target.result);
                         photoCount++;
+
+                        // Solo proceder si ya hemos leído todas las fotos
                         if (photoCount === photos.length) {
-                            if (photos.length >= 1 && photos.length <= 5) {
-                                localStorage.setItem('username', username);
-                                localStorage.setItem('profilePicture', 'default-profile.png');
-                                localStorage.setItem('photos', JSON.stringify(photos));
-                                window.location.href = 'index.html';
-                            }
+                            localStorage.setItem('username', username);
+                            localStorage.setItem('profilePicture', 'default-profile.png');
+                            localStorage.setItem('photos', JSON.stringify(photos));
+                            window.location.href = 'index.html';
                         }
                     };
                     reader.readAsDataURL(file);
                 }
             }
 
-            if (photos.length < 1) {
-                alert("Debes subir al menos una foto.");
-            } else if (photos.length > 5) {
-                alert("Solo puedes subir un máximo de 5 fotos.");
-            }
+            // Validamos al final de la carga, esperando el procesamiento de los archivos
+            setTimeout(function() {
+                if (photos.length === 0) {
+                    alert("Debes subir al menos una foto.");
+                } else if (photos.length > 5) {
+                    alert("Solo puedes subir un máximo de 5 fotos.");
+                }
+            }, 500); // Damos tiempo para procesar las imágenes
         });
     </script>
 </body>
