@@ -100,7 +100,8 @@
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             z-index: 1;
-            width: 200px; /* Aumentado el ancho del menú desplegable */
+            width: 200px; /* Ancho del menú desplegable */
+            right: 0; /* Alineado al margen derecho */
         }
 
         .submenu a {
@@ -108,10 +109,12 @@
             padding: 10px;
             color: #333;
             text-decoration: none;
+            transition: background-color 0.3s, color 0.3s; /* Transición suave para el hover */
         }
 
         .submenu a:hover {
-            background-color: #f1f1f1;
+            background-color: #800080; /* Color de fondo morado oscuro */
+            color: white; /* Color de texto blanco */
         }
 
         .container {
