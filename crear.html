@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta</title>
+    <link rel="icon" href="images/minilogo.png" type="image/png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px 0;
+            width: 200px;
+        }
+
+        button {
+            background-color: #800080;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #BA55D3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Crear Cuenta</h2>
+        <input type="text" id="username" placeholder="Usuario" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <input type="file" id="profilePicture" accept="image/*" required>
+        <button id="createButton">Crear Cuenta</button>
+        <p>¿Ya tienes una cuenta? <a href="iniciar.html">Iniciar sesión</a></p>
+    </div>
+
+    <script>
+        document.getElementById('createButton').addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const profilePicture = document.getElementById('profilePicture').files[0];
+
+            if (username && password && profilePicture) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('password', password);
+                    localStorage.setItem('profilePicture', e.target.result); // Guardamos la imagen en base64
+                    alert('Cuenta creada con éxito! Ahora puedes iniciar sesión.');
+                    window.location.href = 'iniciar.html';
+                };
+                reader.readAsDataURL(profilePicture);
+            } else {
+                alert('Por favor, completa todos los campos.');
+            }
+        });
+    </script>
+</body>
+</html>
