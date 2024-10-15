@@ -7,7 +7,7 @@
     <link rel="icon" href="images/minilogo.png" type="image/png">
     
     <style>
-        /* Estilos aquí */
+        /* Estilos básicos */
         * {
             margin: 0;
             padding: 0;
@@ -18,31 +18,32 @@
             font-family: 'Arial', sans-serif;
             color: #333;
             text-align: center;
-            background-color: white; /* Color de fondo blanco */
+            background-color: white;
             position: relative;
         }
 
         .header {
             background-color: rgba(255, 182, 193, 0.8);
-            padding: 20px 30px;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
         }
 
         .header h1 {
-            font-size: 2.5em;
+            font-size: 2em;
             color: #800080;
             flex-grow: 1;
             text-align: center;
         }
 
         .logo {
-            width: 50px; /* Ajusta el tamaño del logo según sea necesario */
-            height: auto; /* Mantiene la proporción del logo */
-            margin-right: 20px; /* Espacio a la derecha del logo */
+            width: 50px;
+            height: auto;
+            margin-right: 20px;
         }
 
         .user-panel {
@@ -123,28 +124,28 @@
         .image-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* Centrar las imágenes en el contenedor */
+            justify-content: center;
             align-items: center;
-            width: 80%; /* Ancho del contenedor de imágenes */
-            margin: 20px auto; /* Margen automático para centrar el contenedor */
-            border: 2px dashed #800080; /* Borde para el contenedor de imágenes */
-            padding: 20px; /* Espacio interno */
-            border-radius: 10px; /* Bordes redondeados */
-            background-color: rgba(255, 182, 193, 0.3); /* Fondo semitransparente */
+            width: 80%;
+            margin: 20px auto;
+            border: 2px dashed #800080;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 182, 193, 0.3);
         }
 
         .image-container img {
-            width: 150px; /* Ajusta el tamaño de las imágenes aquí */
-            height: auto; /* Mantiene la proporción de las imágenes */
-            margin: 10px; /* Margen entre imágenes */
-            border-radius: 5px; /* Bordes redondeados para las imágenes */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para las imágenes */
-            cursor: pointer; /* Cambiar el cursor al pasar sobre la imagen */
+            width: 150px;
+            height: auto;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
         }
 
         .updates-panel {
             width: 250px;
-            background-color: rgba(255, 182, 193, 0.9); /* Fondo semitransparente para las actualizaciones */
+            background-color: rgba(255, 182, 193, 0.9);
             padding: 20px;
             border-radius: 10px;
             margin-left: auto;
@@ -163,6 +164,42 @@
             padding: 10px;
             margin-bottom: 10px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Media queries para pantallas pequeñas */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .logo {
+                width: 40px;
+            }
+
+            .image-container img {
+                width: 100px;
+            }
+
+            .user-button {
+                min-width: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .image-container img {
+                width: 80px;
+                margin: 5px;
+            }
+
+            .updates-panel {
+                width: 100%;
+                margin: 20px 0;
+            }
         }
     </style>
 </head>
