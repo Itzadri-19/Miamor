@@ -7,7 +7,6 @@
     <link rel="icon" href="images/minilogo.png" type="image/png">
     <link rel="stylesheet" href="css/styles.css"> <!-- Enlace al CSS -->
     <style>
-        /* Estilos aquí */
         * {
             margin: 0;
             padding: 0;
@@ -16,12 +15,11 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f9f9f9; /* Color de fondo suave */
-            color: #333; /* Color del texto */
+            background-color: #f9f9f9;
+            color: #333;
             text-align: center;
         }
 
-        /* Estilos de la cabecera */
         .header {
             background-color: rgba(255, 182, 193, 0.8);
             padding: 20px;
@@ -29,10 +27,10 @@
 
         .header h1 {
             font-size: 2.5em;
-            color: #800080; /* Color de texto para el título */
+            color: #800080;
         }
 
-        /* Estilos del formulario */
+        /* Contenedor del formulario */
         .form-container {
             margin-top: 20px;
             padding: 20px;
@@ -40,57 +38,78 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             display: inline-block;
+            width: 100%;
+            max-width: 400px; /* Limitar el tamaño en pantallas grandes */
         }
 
         .form-group {
             margin: 10px 0;
         }
 
-        .form-group input {
+        .form-group input, 
+        .form-group button {
             padding: 10px;
-            width: 300px;
+            width: 100%;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box;
         }
 
         .form-group button {
-            background-color: #800080; /* Color del botón */
+            background-color: #800080;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
 
         .form-group button:hover {
-            background-color: #BA55D3; /* Color al pasar el ratón */
+            background-color: #BA55D3;
         }
 
-        /* Botón de cancelar */
         .cancel-button {
-            background-color: #FF6347; /* Color del botón de cancelar */
-            margin-top: 20px;
+            background-color: #FF6347;
+            margin-top: 10px;
         }
 
         .cancel-button:hover {
-            background-color: #FF4500; /* Color al pasar el ratón */
+            background-color: #FF4500;
         }
 
-        /* Botón de cerrar sesión */
         .logout-button {
-            background-color: #FF4500; /* Color del botón de cerrar sesión */
-            color: white; /* Color del texto */
-            border: none; /* Sin borde */
-            border-radius: 5px; /* Bordes redondeados */
-            padding: 10px 15px; /* Padding interno */
-            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-            margin-top: 20px; /* Espacio superior */
-            transition: background-color 0.3s; /* Efecto de transición */
+            background-color: #FF4500;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
         }
 
         .logout-button:hover {
-            background-color: #FF6347; /* Color al pasar el ratón */
+            background-color: #FF6347;
+        }
+
+        /* Estilos para pantallas pequeñas (móviles) */
+        @media (max-width: 600px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .form-container {
+                padding: 15px;
+            }
+
+            .form-group input, 
+            .form-group button {
+                padding: 10px;
+                width: 95%;
+            }
+
+            button, .logout-button, .cancel-button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -120,7 +139,6 @@
     </div>
 
     <script>
-        // Cargar datos existentes al iniciar
         window.onload = function() {
             const storedUsername = localStorage.getItem('username');
             const storedProfilePicture = localStorage.getItem('profilePicture');
@@ -128,52 +146,43 @@
             if (storedUsername) {
                 document.getElementById('newUsername').value = storedUsername;
             }
-
-            if (storedProfilePicture) {
-                // Aquí podrías mostrar la imagen existente, si es necesario
-                // document.getElementById('currentProfileImage').src = storedProfilePicture;
-            }
         };
 
-        // Guardar cambios al presionar el botón
         document.getElementById('saveButton').addEventListener('click', function() {
             const newUsername = document.getElementById('newUsername').value;
             const newPassword = document.getElementById('newPassword').value;
             const newProfileImage = document.getElementById('newProfileImage').files[0];
-
-            // Lógica para guardar los cambios
-            let changesSaved = false; // Flag para verificar si se han guardado cambios
+            let changesSaved = false;
 
             if (newUsername) {
-                localStorage.setItem('username', newUsername); // Actualizar el nombre de usuario
-                changesSaved = true; // Marcar como cambios guardados
+                localStorage.setItem('username', newUsername);
+                changesSaved = true;
             }
 
             if (newPassword) {
-                localStorage.setItem('password', newPassword); // Actualizar la contraseña
-                changesSaved = true; // Marcar como cambios guardados
+                localStorage.setItem('password', newPassword);
+                changesSaved = true;
             }
 
             if (newProfileImage) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    localStorage.setItem('profilePicture', event.target.result); // Guardar la nueva imagen de perfil
-                    changesSaved = true; // Marcar como cambios guardados
-                    alert('Cambios guardados'); // Alerta después de guardar la imagen
-                    window.location.href = 'index.html'; // Redirigir al index después de guardar
+                    localStorage.setItem('profilePicture', event.target.result);
+                    changesSaved = true;
+                    alert('Cambios guardados');
+                    window.location.href = 'index.html';
                 };
-                reader.readAsDataURL(newProfileImage); // Leer la imagen como Data URL
+                reader.readAsDataURL(newProfileImage);
             } else if (changesSaved) {
-                alert('Cambios guardados'); // Si solo se actualiza el nombre o contraseña
-                window.location.href = 'index.html'; // Redirigir al index después de guardar
+                alert('Cambios guardados');
+                window.location.href = 'index.html';
             }
         });
 
-        // Evento para el botón de cerrar sesión
         document.getElementById('logoutButton').addEventListener('click', function() {
-            localStorage.removeItem('username'); // Eliminar el nombre de usuario almacenado
-            localStorage.removeItem('profilePicture'); // Eliminar la imagen de perfil almacenada
-            window.location.href = 'iniciar.html'; // Redirigir a la página de inicio de sesión
+            localStorage.removeItem('username');
+            localStorage.removeItem('profilePicture');
+            window.location.href = 'iniciar.html';
         });
     </script>
 </body>
