@@ -6,7 +6,7 @@
     <title>Iniciar Sesión</title>
     
     <style>
-        /* Estilos simples para el formulario */
+        /* Estilos para móvil y escritorio */
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
@@ -15,22 +15,24 @@
         }
 
         .form-container {
-            margin: auto;
+            margin: 50px auto;
             padding: 20px;
             border: 2px solid #800080;
             border-radius: 10px;
             background-color: rgba(255, 182, 193, 0.3);
             max-width: 400px;
-            width: 90%; /* Se ajusta automáticamente según el tamaño de la pantalla */
+            width: 100%; /* Para adaptarse a pantallas pequeñas */
+            box-sizing: border-box;
         }
 
         input[type="text"], input[type="password"], input[type="file"] {
             display: block;
             margin: 10px auto;
-            width: 80%;
+            width: 90%; /* Ajuste de ancho flexible */
             padding: 10px;
             border: 1px solid #800080;
             border-radius: 5px;
+            box-sizing: border-box; /* Asegura que el padding esté incluido */
         }
 
         button {
@@ -40,27 +42,26 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            width: 80%;
+            width: 90%; /* Ajuste de ancho flexible */
         }
 
         button:hover {
             background-color: #BA55D3;
         }
 
+        p {
+            margin-top: 20px;
+        }
+
+        /* Estilos para pantallas más pequeñas */
         @media (max-width: 600px) {
             .form-container {
-                width: 100%;
+                width: 100%; /* Asegurarse de que el contenedor ocupe todo el ancho */
                 padding: 15px;
             }
 
-            input[type="text"], input[type="password"], input[type="file"] {
-                width: 90%;
-            }
-
-            button {
-                width: 90%;
-                padding: 12px;
+            input, button {
+                width: 95%; /* Ajustar los inputs en pantallas muy pequeñas */
             }
         }
     </style>
@@ -88,7 +89,6 @@
             const password = document.getElementById('password').value;
             const photos = [];
             
-            // Comprobar cuántas fotos se han subido
             let photoCount = 0;
             for (let i = 1; i <= 5; i++) {
                 const fileInput = document.getElementById('photo' + i);
@@ -98,13 +98,12 @@
                     reader.onload = function(e) {
                         photos.push(e.target.result);
                         photoCount++;
-                        // Guardamos el nombre de usuario, contraseña y fotos en el almacenamiento local
                         if (photoCount === photos.length) {
                             if (photos.length >= 1 && photos.length <= 5) {
                                 localStorage.setItem('username', username);
-                                localStorage.setItem('profilePicture', 'default-profile.png'); // Reemplaza con la lógica para manejar la foto de perfil si la tienes.
+                                localStorage.setItem('profilePicture', 'default-profile.png');
                                 localStorage.setItem('photos', JSON.stringify(photos));
-                                window.location.href = 'index.html'; // Redirige a index.html después de iniciar sesión
+                                window.location.href = 'index.html';
                             }
                         }
                     };
@@ -112,7 +111,6 @@
                 }
             }
 
-            // Validar la cantidad de fotos al finalizar la carga
             if (photos.length < 1) {
                 alert("Debes subir al menos una foto.");
             } else if (photos.length > 5) {
