@@ -13,6 +13,7 @@
             background-color: white;
             padding: 20px;
         }
+
         .form-container {
             margin: auto;
             padding: 20px;
@@ -20,13 +21,18 @@
             border-radius: 10px;
             background-color: rgba(255, 182, 193, 0.3);
             max-width: 400px;
+            width: 90%; /* Se ajusta automáticamente según el tamaño de la pantalla */
         }
+
         input[type="text"], input[type="password"], input[type="file"] {
             display: block;
             margin: 10px auto;
             width: 80%;
             padding: 10px;
+            border: 1px solid #800080;
+            border-radius: 5px;
         }
+
         button {
             padding: 10px;
             background-color: #800080;
@@ -35,9 +41,27 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            width: 80%;
         }
+
         button:hover {
             background-color: #BA55D3;
+        }
+
+        @media (max-width: 600px) {
+            .form-container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            input[type="text"], input[type="password"], input[type="file"] {
+                width: 90%;
+            }
+
+            button {
+                width: 90%;
+                padding: 12px;
+            }
         }
     </style>
 </head>
