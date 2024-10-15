@@ -11,16 +11,28 @@
             background-color: #f9f9f9;
             color: #333;
             text-align: center;
+            padding: 20px;
         }
 
         .container {
             margin-top: 50px;
+            max-width: 400px;
+            background-color: white;
+            padding: 20px;
+            border: 2px solid #800080;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%; /* Ajuste de ancho para pantallas más pequeñas */
+            margin-left: auto;
+            margin-right: auto;
         }
 
         input {
             padding: 10px;
             margin: 10px 0;
-            width: 200px;
+            width: 80%; /* Ancho flexible para móviles */
+            border: 1px solid #800080;
+            border-radius: 5px;
         }
 
         button {
@@ -29,10 +41,23 @@
             border: none;
             padding: 10px 20px;
             cursor: pointer;
+            border-radius: 5px;
+            width: 80%;
         }
 
         button:hover {
             background-color: #BA55D3;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+                width: 100%;
+            }
+
+            input, button {
+                width: 90%; /* Más espacio en pantallas pequeñas */
+            }
         }
     </style>
 </head>
