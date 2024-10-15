@@ -3,84 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Enlace al CSS -->
+    <title>Crear Cuenta</title>
+    <link rel="icon" href="images/minilogo.png" type="image/png">
     <style>
-        /* Estilos simples para el formulario */
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
             text-align: center;
-            background-color: white;
-            padding: 20px;
         }
-        .form-container {
-            margin: auto;
-            padding: 20px;
-            border: 2px solid #800080;
-            border-radius: 10px;
-            background-color: rgba(255, 182, 193, 0.3);
-            max-width: 400px;
+
+        .container {
+            margin-top: 50px;
         }
-        input[type="text"], input[type="password"], input[type="file"] {
-            display: block;
-            margin: 10px auto;
-            width: 80%;
+
+        input {
             padding: 10px;
+            margin: 10px 0;
+            width: 200px;
         }
+
         button {
-            padding: 10px;
             background-color: #800080;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 10px 20px;
             cursor: pointer;
-            margin-top: 10px;
         }
+
         button:hover {
             background-color: #BA55D3;
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Iniciar Sesión</h1>
-        <input type="text" id="username" placeholder="Nombre de usuario" required>
+    <div class="container">
+        <h2>Crear Cuenta</h2>
+        <input type="text" id="username" placeholder="Usuario" required>
         <input type="password" id="password" placeholder="Contraseña" required>
-        
-        <!-- Subida de hasta 5 fotos -->
-        <input type="file" id="photo1" accept="image/*">
-        <input type="file" id="photo2" accept="image/*">
-        <input type="file" id="photo3" accept="image/*">
-        <input type="file" id="photo4" accept="image/*">
-        <input type="file" id="photo5" accept="image/*">
-        
-        <button id="loginButton">Iniciar Sesión</button>
-        <p>No tienes cuenta? <a href="crear.html">Crear cuenta</a></p>
+        <input type="file" id="profilePicture" accept="image/*" required>
+        <button id="createButton">Crear Cuenta</button>
+        <p>¿Ya tienes una cuenta? <a href="iniciar.html">Iniciar sesión</a></p>
     </div>
 
     <script>
-        document.getElementById('loginButton').addEventListener('click', function() {
+        document.getElementById('createButton').addEventListener('click', function() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            const photos = [];
-            
-            for (let i = 1; i <= 5; i++) {
-                const fileInput = document.getElementById('photo' + i);
-                if (fileInput.files.length > 0) {
-                    const file = fileInput.files[0];
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        photos.push(e.target.result);
-                        // Guardamos el nombre de usuario, contraseña y fotos en el almacenamiento local
-                        if (photos.length === 5 || i === 5) {
-                            localStorage.setItem('username', username);
-                            localStorage.setItem('profilePicture', 'default-profile.png'); // Reemplaza con la lógica para manejar la foto de perfil si la tienes.
-                            localStorage.setItem('photos', JSON.stringify(photos));
-                            window.location.href = 'index.html'; // Redirige a index.html después de iniciar sesión
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                }
+            const profilePicture = document.getElementById('profilePicture').files[0];
+
+            if (username && password && profilePicture) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('password', password);
+                    localStorage.setItem('profilePicture', e.target.result); // Guardamos la imagen en base64
+                    alert('Cuenta creada con éxito! Ahora puedes iniciar sesión.');
+                    window.location.href = 'iniciar.html';
+                };
+                reader.readAsDataURL(profilePicture);
+            } else {
+                alert('Por favor, completa todos los campos.');
             }
         });
     </script>
