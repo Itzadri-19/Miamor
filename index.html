@@ -3,45 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elige una opción</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Enlace al CSS -->
+    <title>Bienvenida Mi Amor</title>
+    <link rel="icon" href="images/minilogo.png" type="image/png">
+    
     <style>
-        /* Aquí puedes añadir los estilos internos si lo necesitas */
+        /* Estilos aquí */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
             color: #333;
             text-align: center;
-            padding: 50px;
+            background-color: white; /* Color de fondo blanco */
+            position: relative;
         }
-        .button-container {
-            margin: 20px;
+
+        .header {
+            background-color: rgba(255, 182, 193, 0.8);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #800080;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .logo {
+            width: 50px; /* Ajusta el tamaño del logo según sea necesario */
+            height: auto; /* Mantiene la proporción del logo */
+            margin-right: 20px; /* Espacio a la derecha del logo */
+        }
+
+        .user-panel {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+        .user-button {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border: 2px solid #800080;
+            border-radius: 50px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+            min-width: 150px;
+        }
+
+        .user-button:hover {
+            background-color: #FFB6C1;
+        }
+
+        .user-image {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .menu {
+            position: relative;
+        }
+
+        .menu-button {
+            background-color: #800080;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .menu-button:hover {
+            background-color: #BA55D3;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .submenu a {
+            display: block;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .submenu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .container {
+            display: flex;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .image-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centrar las imágenes en el contenedor */
+            align-items: center;
+            width: 80%; /* Ancho del contenedor de imágenes */
+            margin: 20px auto; /* Margen automático para centrar el contenedor */
+            border: 2px dashed #800080; /* Borde para el contenedor de imágenes */
+            padding: 20px; /* Espacio interno */
+            border-radius: 10px; /* Bordes redondeados */
+            background-color: rgba(255, 182, 193, 0.3); /* Fondo semitransparente */
+        }
+
+        .image-container img {
+            width: 150px; /* Ajusta el tamaño de las imágenes aquí */
+            height: auto; /* Mantiene la proporción de las imágenes */
+            margin: 10px; /* Margen entre imágenes */
+            border-radius: 5px; /* Bordes redondeados para las imágenes */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para las imágenes */
+            cursor: pointer; /* Cambiar el cursor al pasar sobre la imagen */
+        }
+
+        .updates-panel {
+            width: 250px;
+            background-color: rgba(255, 182, 193, 0.9); /* Fondo semitransparente para las actualizaciones */
+            padding: 20px;
+            border-radius: 10px;
+            margin-left: auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .updates-panel h2 {
+            font-size: 1.5em;
+            color: #800080;
+            margin-bottom: 15px;
+        }
+
+        .update {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <div class="button-container">
-        <h1>¿Quieres entrar dependiendo tu estado de ánimo?</h1>
-        <button id="melancolico" onclick="window.location.href='melancolico.html'">Melancólico</button>
-        <button id="animar" onclick="window.location.href='animar.html'">Animar</button>
+    <div class="header">
+        <img src="images/logo.png" alt="Logo" class="logo"> <!-- Añade tu logo aquí -->
+        <h1>Bienvenida Mi Amor</h1>
+        <div class="user-panel">
+            <button class="user-button" id="userButton" onclick="window.location.href='panel.html'">
+                <img id="userProfile" src="" alt="User Profile" class="user-image" style="display:none;">
+                <span id="usernameDisplay" style="display:none;"></span> <!-- Aquí se mostrará el nombre de usuario -->
+            </button>
+        </div>
+        <div class="menu">
+            <button class="menu-button" id="menuButton">☰</button>
+            <div class="submenu" id="submenu">
+                <a href="opciones/vernos.html">¿Cuánto queda para vernos?</a>
+                <a href="opciones/paris.html">¿Días para París?</a>
+                <a href="opciones/estado_animo.html">Estado de ánimo</a>
+                <a href="opciones/jugar.html">Jugar</a>
+            </div>
+        </div>
     </div>
-    
-    <div class="button-container options-container">
-        <p>Ver otras opciones:</p>
-        <button onclick="window.location.href='opciones/jugar.html'">Jugar</button>
-        <button onclick="window.location.href='opciones/vernos.html'">¿Cuánto queda para vernos?</button>
-        <button onclick="window.location.href='opciones/paris.html'">¿Días para París?</button>
+
+    <div class="image-container" id="imageContainer">
+        <!-- Aquí se cargarán las imágenes del usuario -->
     </div>
 
     <script>
-        // Verificar si el usuario ha iniciado sesión
-        const lastLogin = localStorage.getItem("lastLogin");
-        const users = JSON.parse(localStorage.getItem("users")) || {};
+        window.onload = function() {
+            const storedUser = localStorage.getItem('username');
+            const storedProfilePicture = localStorage.getItem('profilePicture');
+            const storedPhotos = JSON.parse(localStorage.getItem('photos')) || [];
 
-        // Si no hay usuarios registrados o el último inicio de sesión no existe, redirigir a usuario.html
-        if (!lastLogin || Object.keys(users).length === 0) {
-            window.location.href = "usuario.html";
+            if (!storedUser) {
+                alert('Debes iniciar sesión para acceder a esta página.');
+                window.location.href = 'iniciar.html';
+            } else {
+                document.getElementById('userProfile').src = storedProfilePicture;
+                document.getElementById('userProfile').style.display = 'inline-block';
+                document.getElementById('usernameDisplay').innerText = storedUser;
+                document.getElementById('usernameDisplay').style.display = 'inline'; 
+                
+                // Cargar las fotos en el contenedor
+                const imageContainer = document.getElementById('imageContainer');
+                storedPhotos.forEach(photo => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = photo;
+                    imgElement.alt = 'Foto del usuario';
+                    imgElement.onclick = function() {
+                        openFullscreen(imgElement); // Llama a la función para abrir en pantalla completa
+                    };
+                    imageContainer.appendChild(imgElement);
+                });
+
+                loadUpdates(); // Cargar actualizaciones al iniciar sesión
+                checkUpdates();
+            }
+        };
+
+        // Función para abrir la imagen en pantalla completa
+        function openFullscreen(img) {
+            if (img.requestFullscreen) {
+                img.requestFullscreen();
+            } else if (img.mozRequestFullScreen) { // Firefox
+                img.mozRequestFullScreen();
+            } else if (img.webkitRequestFullscreen) { // Chrome, Safari y Opera
+                img.webkitRequestFullscreen();
+            } else if (img.msRequestFullscreen) { // IE/Edge
+                img.msRequestFullscreen();
+            }
         }
+
+        document.getElementById('menuButton').addEventListener('click', function() {
+            const submenu = document.getElementById('submenu');
+            submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
+        });
     </script>
 </body>
 </html>
